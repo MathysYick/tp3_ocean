@@ -12,12 +12,23 @@
 
 #ifndef liste_chainee_h
 #define liste_chainee_h
-typedef struct noeud {
+typedef struct noeud {   
 	t_animal animal;
 	struct noeud* suivant;
 } t_noeud;
 
+//-----------------------------------------------------------// Nécessaire ??
+typedef t_noeud* ptr_noeud;
+
+typedef struct liste {
+	ptr_noeud debut;
+	ptr_noeud fin;
+	//(void*)liste; // La liste? huh
+	int nb_animaux;
+
+}t_liste;
 //Structure de la liste (Debut, fin , nb animaux, la liste)
+//----------------------------------------------------------//
 
 
 t_noeud* creerNoeud(t_animal animal);
@@ -30,7 +41,7 @@ void afficher_liste(t_noeud* tete);
 
 t_noeud* libererListe(t_noeud* tete);
 
-int nb_Animal(t_noeud* tete);
+int get_nb_Animal(t_noeud* tete);
 
 //Déplacer le pointeur courant
 

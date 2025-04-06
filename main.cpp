@@ -1,6 +1,5 @@
 /*
 
-
 */
 
 
@@ -9,50 +8,82 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "util.h"
-//#include "util.cpp"
 
-//#include "utilitaire_affichage.h"
-//#include "utilitaire_affichage.cpp"
-
-//#include "winBGIm.h"
-//#include "winBGIm.cpp"
-
-//#include "animal.h"
-//#include "ocean.h"
 #include "poisson.h"
 #include "requin.h"
 #include "util.h"
 #include "utilitaire_affichage.h"
 
-//#include "liste_chainee.h"
-//#include "liste_chainee.cpp"
+#define MAX_ITERATION 5000
+
+typedef enum { UPDATE_REQUIN, UPDATE_POISSON } t_machineState;
+
 
 
 int main() {
 	init_alea();
 
+
+
 	t_animal lion;
 	init_animal(&lion, alea(0, HAUTEUR), alea(0, LARGEUR),2,7,25 );
 	printf("HELLO\n");
 
-	t_noeud* liste = creerNoeud(lion);
+	t_noeud* liste_poisson = creerNoeud(lion);
 	
-	insererEnTete(&liste, lion);
-	insererEnTete(&liste, lion);
-	insererEnTete(&liste, lion);
+	insererEnTete(&liste_poisson, lion);
+	insererEnTete(&liste_poisson, lion);
+	insererEnTete(&liste_poisson, lion);
 	printf("Liste apres insertion: ");
-	afficher_liste(liste);
+	afficher_liste(liste_poisson);
 	
 	int poisson = 0;
-	poisson = nb_Animal(liste);
-	printf("NB animal: %d", poisson);
+	poisson = get_nb_Animal(liste_poisson);
+	printf("NB animal: %d\n", poisson);
+
+	t_ocean ocean;
+	init_ocean(ocean);
+	
+	t_case essai;
+	essai.contenu = REQUIN;
+	essai.animal = liste_poisson; //On lui passe une liste d'animal
+
+	ocean[3][4] = essai;
+	t_case case_target;
+	case_target = get_case_content(ocean, 2, 2);
+	printf("Contenu: %d, pointeur? %p\n", case_target.contenu, (void*)&case_target.animal);
+
+	case_target = get_case_content(ocean, 3, 4);
+	printf("Contenu: %d, pointeur? %p\n", case_target.contenu, (void*)&case_target.animal);
 
 	//fermer_mode_graphique();
 
-	delai_ecran(1000);
-	//while (1);
+	init_graph();
+	draw_ocean(ocean);
 
+
+	afficher_case(2, 2, 100, 10, RED);
+
+	delai_ecran(2500);
+
+	printf("Before exit\n");
+
+	int iteration = 0;
+	t_machineState machineState = UPDATE_REQUIN;
+
+	while (iteration< MAX_ITERATION);
+	switch (machineState) {
+	case UPDATE_REQUIN:
+
+		break;
+
+	case UPDATE_POISSON:
+
+		break;
+
+	default:
+		break;
+	}
 
 	return 1;
 }

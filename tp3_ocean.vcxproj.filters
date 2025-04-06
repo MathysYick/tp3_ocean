@@ -27,9 +27,6 @@
     <ClCompile Include="..\..\..\..\..\..\Downloads\INF147_TP3_Predateurs\utilitaire_affichage.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Downloads\INF147_TP3_Predateurs\winBGIm.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="ocean.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="liste_chainee.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Downloads\INF147_TP3_Predateurs\winBGIm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

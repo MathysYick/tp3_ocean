@@ -3,9 +3,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "animal.h"
 #include "liste_chainee.h"
 
+
+
+#ifndef liste_chainee_h
+#define liste_chainee_h
+typedef struct noeud {
+	t_animal animal;
+	struct noeud* suivant;
+} t_noeud;
+
+//-----------------------------------------------------------// Nécessaire ??
+typedef t_noeud* ptr_noeud;
+
+typedef struct liste {
+	ptr_noeud debut;
+	ptr_noeud fin;
+	//(void*)liste; // La liste? huh
+	int nb_animaux;
+
+}t_liste;
+//Structure de la liste (Debut, fin , nb animaux, la liste)
+//----------------------------------------------------------//
+
+#endif
 
 t_noeud* creerNoeud(t_animal animal) {
 	t_noeud* nouveau = (t_noeud*)malloc(sizeof(t_noeud));
@@ -59,19 +81,43 @@ t_noeud* libererListe(t_noeud* tete) {
 	return NULL;
 }
 
-int nb_Animal(t_noeud* tete) {
+int get_nb_Animal(t_noeud* tete) {
 	t_noeud* temp;
 	int nbAnimal = 0;
 	while (tete != NULL) {
 		temp = tete;
 		tete = tete->suivant;
-		nbAnimal++;
+		nbAnimal++; -
 	}
 	return nbAnimal;
 }
 
-//Déplacer le pointeur courant
+void DeplacerCourant(t_noeud *tete) {
+	t_noeud *courant = (*tete)->suivant;
+}
 
-//Obtenir le contenu du pointeur courant
+t_animal ContenuCourant(t_noeud *tete) {
+	t_noeud *courant = tete;
 
-//Retirer le contenu du pointeur courant. Noeud doit pointer au prochain. Retourne une copie de l'animal retiré
+	return courant->animal;
+}
+
+t_animal SupprimerCourant(t_noeud **tete) {
+	t_noeud *courant = *tete;
+	t_animal animal_courant;
+
+	if ((*tete)->suivant == NULL) {
+		valeur_courant = courant->animal; 
+		free(courant);
+		*tete = NULL;
+
+		return animal_courant;
+	}
+	else {
+		*tete = (*tete)->suivant;
+		valeur_courant = courant->animal;
+		free(courant);
+
+		return animal_courant;
+	}
+}
