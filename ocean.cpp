@@ -84,7 +84,7 @@ void draw_ocean(t_ocean ocean) {
 			}
 			else if (ocean[i][j].contenu == VIDE) {
 				//printf("VIDE");
-				afficher_case(i, j, 10, 100, RED);
+				afficher_case(i, j, 1, 1, RED);
 
 			}
 
