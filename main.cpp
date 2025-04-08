@@ -62,7 +62,7 @@ int main() {
 	draw_ocean(ocean);
 
 
-	afficher_case(2, 2, 100, 10, RED);
+	afficher_case(2, 2, 10, 10, RED);
 
 	delai_ecran(2500);
 
