@@ -5,11 +5,6 @@
 
 #include "liste_chainee.h"
 
-//sdfsdf
-//gogoogogoogo
-
-// bonsoir tabarnak
-
 #ifndef liste_chainee_h
 #define liste_chainee_h
 typedef struct noeud {
@@ -95,38 +90,32 @@ int get_nb_Animal(t_noeud* tete) {
 	return nbAnimal;
 }
 
-//void DeplacerCourant(t_noeud *tete) {
-//	t_noeud *courant = (*tete)->suivant;
-//}
-//
-//t_animal ContenuCourant(t_noeud *tete) {
-//	t_noeud *courant = tete;
-//
-//	return courant->animal;
-//}
-//
-//t_animal SupprimerCourant(t_noeud **tete) {
-//	t_noeud *courant = *tete;
-//	t_animal animal_courant;
-//
-//	if ((*tete)->suivant == NULL) {
-//		valeur_courant = courant->animal; 
-//		free(courant);
-//		*tete = NULL;
-//
-//		return animal_courant;
-//	}
-//	else {
-//		*tete = (*tete)->suivant;
-//		valeur_courant = courant->animal;
-//		free(courant);
-//
-//		return animal_courant;
-//	}
-//}
+void DeplacerCourant(t_noeud *tete) {
+	t_noeud *courant = tete->suivant;
+}
 
+t_animal ContenuCourant(t_noeud *tete) {
+	t_noeud *courant = tete;
 
+	return courant->animal;
+}
 
-void Bonjour() {
-	printf("hello");
+t_animal SupprimerCourant(t_noeud **tete) {
+	t_noeud *courant = *tete;
+	t_animal animal_courant;
+
+	if ((*tete)->suivant == NULL) {
+		animal_courant = courant->animal; 
+		free(courant);
+		*tete = NULL;
+
+		return animal_courant;
+	}
+	else {
+		*tete = (*tete)->suivant;
+		animal_courant = courant->animal;
+		free(courant);
+
+		return animal_courant;
+	}
 }

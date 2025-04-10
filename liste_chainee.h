@@ -2,12 +2,12 @@
 
 #include "animal.h"
 
-//typedef struct {
-//	int   posx, posy;     //sa position
-//	int   age;            //son age (en jours)
-//	int   energie_sante;  //le niveau d'énergie 
-//	int   jrs_gest;       //nombre de jours en gestation
-//} t_animal;
+typedef struct {
+	int   posx, posy;     //sa position
+	int   age;            //son age (en jours)
+	int   energie_sante;  //le niveau d'énergie 
+	int   jrs_gest;       //nombre de jours en gestation
+} t_animal;
 
 
 #ifndef liste_chainee_h
