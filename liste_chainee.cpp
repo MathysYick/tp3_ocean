@@ -6,7 +6,7 @@
 #include "liste_chainee.h"
 
 //sdfsdf
-
+//gogoogogoogo
 
 #ifndef liste_chainee_h
 #define liste_chainee_h
@@ -122,6 +122,7 @@ int get_nb_Animal(t_noeud* tete) {
 //		return animal_courant;
 //	}
 //}
+
 
 
 void Bonjour() {
