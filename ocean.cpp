@@ -55,6 +55,7 @@ void init_ocean(t_ocean ocean) {
 }
 
 t_case get_case_content(t_ocean ocean, int posx, int posy) {
+	//printf("get case x: %d, y: %d\n", posx, posy);
 	return ocean[posx][posy];
 }
 
@@ -66,6 +67,7 @@ void set_case(t_ocean ocean, void* animal, t_contenu contenu, int posx, int posy
 void errase_case(t_ocean ocean, int posx, int posy) {
 	ocean[posx][posy].contenu = VIDE;
 	ocean[posx][posy].animal = NULL;
+	//printf("errase");
 }
 
 int count_empty_case(t_ocean ocean, int posx, int posy) {
@@ -82,12 +84,30 @@ int count_empty_case(t_ocean ocean, int posx, int posy) {
 	ocean[posx+1][posy+1].contenu = REQUIN;*/
 	t_case cell;
 	int empty_count = 0;
+	int offset = 0;
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
-			t_case cell = get_case_content(ocean, posx + i, posy + j);
-			//printf("x: %d, y: %d, contenu: %d\n", posx + i, posy + j, cell.contenu);  //DB
+			offset = 0;
+			if (posx + i < 0 || posx + i >= HAUTEUR) {
+				printf("Out of bound in x\n");
+				break;
+			}
+			if (posy + j < 0) {
+				printf("Out of bound in -y\n");
+				offset += 119;
+			}else if ( posy + j >= LARGEUR) {
+				printf("Out of bound in +y\n");
+				offset -= 119;
+			}
+			
+			t_case cell = get_case_content(ocean, posx + i, posy + j+ offset);
+			//printf("x: %d, y: %d, contenu: %d\n", posx + i, posy + j+ offset, cell.contenu);  //DB
 			if (cell.contenu == VIDE) {
+				//printf("empty cell: x: %d y: %d\n", posx + i, posy + j+ offset);
 				empty_count++;
+			}
+			else {
+				//printf("Cell occupé x: %d y: %d\n", posx + i, posy + j+ offset);
 			}
 		}
 		
@@ -112,7 +132,7 @@ void draw_ocean(t_ocean ocean) {
 			}
 			else if (ocean[i][j].contenu == VIDE) {
 				//printf("VIDE");
-				//afficher_case(i, j, HAUTEUR, LARGEUR, RED);
+				afficher_case(i, j, HAUTEUR, LARGEUR, BLACK);
 				//afficher_case(i, j, 1, 1, RED);
 			}
 			else if (ocean[i][j].contenu == POISSON) {
@@ -121,7 +141,7 @@ void draw_ocean(t_ocean ocean) {
 				//afficher_case(i, j, 1, 1, RED);
 			}
 			if (ocean[i][j].contenu != VIDE) { //DB
-				delai_ecran(1);
+				//delai_ecran(1);
 			}
 			
 

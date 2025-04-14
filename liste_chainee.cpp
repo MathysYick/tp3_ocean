@@ -63,9 +63,10 @@ void afficher_liste(t_noeud* tete) {
 	t_noeud* temp = tete;
 	int a = 0;
 	while (temp != NULL) {
-		printf("%d -> ", temp->animal.age);
-		temp = temp->suivant;
 		a++;
+		printf("\n Noeud %d: %d -> ", a, temp->animal.age);
+		temp = temp->suivant;
+		
 	}
 	printf("NULL\n");
 	printf("a = %d\n", a);
