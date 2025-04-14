@@ -13,7 +13,9 @@
 #define NB_JRS_GEST_POISSON 15 //nombre de jours de gestation
 #define ENERGIE_INIT_POISSON 3 //valeur initiale d'énergie
 
-//void init_liste_poisson(t_noeud liste_poissons,  )
+void init_liste_poissons(t_noeud** tete, t_ocean ocean, int nb_poissons_voulu);
+
+int deplacer_poisson(t_ocean ocean, t_animal* f);
 
 //void deplacer pois
 //

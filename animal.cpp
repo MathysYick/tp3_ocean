@@ -30,6 +30,7 @@ typedef struct {
 /* Reçoit un animal et ses valeurs initiales, va initialiser l'animal reçu.  */
 void init_animal(t_animal* animal, int px, int py, int age, int energie, int gest) {
 
+	
 	animal->posx = px;
 	animal->posy = py;
 	animal->age = age;

@@ -36,5 +36,7 @@ void set_case(t_ocean ocean, void* animal, t_contenu contenu, int posx, int posy
 
 void errase_case(t_ocean ocean, int posx, int posy);
 
+int count_empty_case(t_ocean ocean, int posx, int posy);
+
 void draw_ocean(t_ocean ocean);
 #endif

@@ -1,8 +1,8 @@
 /**********************************************************************/
 /* UTIL.H   Librairie de fonctions utilitaires.                       */
 /**********************************************************************/
-#if !defined UTIL
-#define UTIL 1
+#if !defined UTIL_H
+#define UTIL_H 1
 
 void init_alea();
 /* Fonction pour initialiser le générateur aléatoire. */

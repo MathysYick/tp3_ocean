@@ -28,9 +28,16 @@ typedef t_case t_ocean[HAUTEUR][LARGEUR];
 
 void init_graph() {
 	printf("Init graph\n");
-	init_graphe(1000, 1000);  //TODO je ne comprends pas les paramètres
+	init_graphe(HAUTEUR, LARGEUR);  //TODO je ne comprends pas les paramètres
 	init_zone_environnement(HAUTEUR, LARGEUR);
-	//afficher_case(2, 2, 5, 50, WHITE);
+	afficher_case(0, 0, 1, 1, WHITE);
+	afficher_case(1, 1, 10, 10, WHITE);
+	afficher_case(2, 2, 5, 50, YELLOW);
+	afficher_case(3, 3, 15, 10, WHITE);
+	afficher_case(4, 4, 100, 100, WHITE);
+	afficher_case(50, 45, 100, 100, WHITE);
+
+
 	afficher_infos(50, 70, 2);
 
 
@@ -39,13 +46,7 @@ void init_graph() {
 void init_ocean(t_ocean ocean) {
 	for (int i = 0; i < HAUTEUR; i++) {
 		for (int j = 0; j < LARGEUR;j++) {
-			if (i % 2 == 0) {
-				ocean[i][j].contenu = VIDE;
-			}
-			else {
-				ocean[i][j].contenu = REQUIN;
-			}
-			
+			ocean[i][j].contenu = VIDE;
 			ocean[i][j].animal = NULL;
 
 		}
@@ -67,26 +68,62 @@ void errase_case(t_ocean ocean, int posx, int posy) {
 	ocean[posx][posy].animal = NULL;
 }
 
-//void count_empty_case(int* posx, int* posy) {
-//	for (int i = 0; i < NB_COUPS; i++) {
-//		
-//	}
-//}
+int count_empty_case(t_ocean ocean, int posx, int posy) {
+	/*ocean[posx-1][posy-1].contenu = VIDE;  //DB
+	ocean[posx-1][posy].contenu = REQUIN;
+	ocean[posx-1][posy+1].contenu = POISSON;
+
+	ocean[posx][posy-1].contenu = REQUIN;
+	ocean[posx][posy].contenu = VIDE;
+	ocean[posx][posy+1].contenu = VIDE;
+
+	ocean[posx+1][posy-1].contenu = VIDE;
+	ocean[posx+1][posy].contenu = POISSON;
+	ocean[posx+1][posy+1].contenu = REQUIN;*/
+	t_case cell;
+	int empty_count = 0;
+	for (int i = -1; i <= 1; i++) {
+		for (int j = -1; j <= 1; j++) {
+			t_case cell = get_case_content(ocean, posx + i, posy + j);
+			//printf("x: %d, y: %d, contenu: %d\n", posx + i, posy + j, cell.contenu);  //DB
+			if (cell.contenu == VIDE) {
+				empty_count++;
+			}
+		}
+		
+	}
+
+	cell = get_case_content(ocean, posx, posy); //Cette condition ne devrais pas être utilisé puisque qu'on ne devrait pas compter autour d'une case vide,
+	if (cell.contenu == VIDE) {                 //mais juste au cas où.
+		empty_count--;
+	}
+	return empty_count;
+}
 
 
 void draw_ocean(t_ocean ocean) {
+	printf("draw ocean\n");
 	for (int i = 0; i < HAUTEUR; i++) {
 		for (int j = 0; j < LARGEUR;j++) {
 			//printf("x: %d y: %d , %d\n",i,j, ocean[i][j].contenu);
 			if (ocean[i][j].contenu == REQUIN) {
 				//printf("requin");
-				afficher_case(i, j, 1, 1, BLUE);
+				afficher_case(i, j, HAUTEUR, LARGEUR, BLUE);
 			}
 			else if (ocean[i][j].contenu == VIDE) {
 				//printf("VIDE");
-				afficher_case(i, j, 1, 1, RED);
-
+				//afficher_case(i, j, HAUTEUR, LARGEUR, RED);
+				//afficher_case(i, j, 1, 1, RED);
 			}
+			else if (ocean[i][j].contenu == POISSON) {
+				//printf("VIDE");
+				afficher_case(i, j, HAUTEUR, LARGEUR, GREEN);
+				//afficher_case(i, j, 1, 1, RED);
+			}
+			if (ocean[i][j].contenu != VIDE) { //DB
+				delai_ecran(1);
+			}
+			
 
 		}
 	}
