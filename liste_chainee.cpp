@@ -46,7 +46,7 @@ void insererEnTete(t_noeud** tete, t_animal animal) {
 
 	nouveau->suivant = *tete;
 	*tete = nouveau;
-	//printf("ptr: %p\n", nouveau->suivant);
+	printf("ptr: %p\n", nouveau->suivant);
 }
 
 t_noeud* supprimerEnTete(t_noeud* tete) {
@@ -64,11 +64,11 @@ void afficher_liste(t_noeud* tete) {
 	int a = 0;
 	while (temp != NULL) {
 		a++;
-		printf("\n Noeud %d: %d -> ", a, temp->animal.age);
+		printf("\n Noeud %d: %d -> ptr: % p", a, temp->animal.age, temp);
 		temp = temp->suivant;
 		
 	}
-	printf("NULL\n");
+	printf("\nNULL\n");
 	printf("a = %d\n", a);
 }
 

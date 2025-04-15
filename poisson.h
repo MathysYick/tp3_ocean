@@ -17,7 +17,7 @@ void init_liste_poissons(t_noeud** tete, t_ocean ocean, int nb_poissons_voulu);
 
 int deplacer_poisson(t_ocean ocean, t_animal* f);
 
-//void deplacer pois
+int add_baby_fish(t_ocean ocean, t_animal* f ,t_noeud** liste_p);
 //
 //void add_fish
 //

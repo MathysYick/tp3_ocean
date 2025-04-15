@@ -30,9 +30,7 @@ typedef struct {
 /* Reçoit un animal et ses valeurs initiales, va initialiser l'animal reçu.  */
 void init_animal(t_animal* animal, int px, int py, int age, int energie, int gest) {
 
-	
-	animal->posx = px;
-	animal->posy = py;
+	set_position(animal, px, py);
 	animal->age = age;
 	animal->energie_sante = energie;
 	animal->jrs_gest = gest;
@@ -55,6 +53,7 @@ void set_position(t_animal* animal, int px, int py) {
    puberté ET a terminé sa période de gestation (donc, il va procréer),
    retourne 0 sinon. */
 int  puberte_atteinte(const t_animal* animal, int puberte, int gestation) {
+	//printf("age: %d, jpur pub: %d\n", animal->age, animal->jrs_gest);  //DB
 	return animal->age >= puberte && animal->jrs_gest >= gestation;
 }
 

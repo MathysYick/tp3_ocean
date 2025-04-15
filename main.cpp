@@ -49,8 +49,27 @@ int main() {
 	int poisson = get_nb_Animal(liste_poisson);
 	printf("NB animal: %d\n", poisson);
 
+	t_animal* bb_test;
+	bb_test = (t_animal*)malloc(sizeof(t_animal));
+	if (bb_test == NULL) {
+		printf("Erreur d'alloc mémoire pour bébé poisson\n");
+		return 0;
+	}
+
 	t_ocean ocean;
 	init_ocean(ocean);
+
+	t_noeud* tempBB = liste_poisson;
+
+	add_baby_fish(ocean, &tempBB->animal, &liste_poisson);
+
+	printf("Liste apres AJOUT bb: ");
+	afficher_liste(liste_poisson);
+
+	poisson = get_nb_Animal(liste_poisson);
+	printf("NB animal: %d\n", poisson);
+
+	//delay_graph(5000);  //DB
 
 	t_case essai;
 	essai.contenu = REQUIN;
@@ -82,17 +101,17 @@ int main() {
 	//f->jrs_gest = 0;
 	//f->posx =alea(0, HAUTEUR);
 	//f->posy = alea(0, LARGEUR);
-	
-    t_animal* f = (t_animal*)malloc(sizeof(t_animal));
+
+	t_animal* f = (t_animal*)malloc(sizeof(t_animal));
 	if (f == NULL) {
 		printf("Erreur d'allocation mémoire pour animal");
 		return 1;
 	}
-    f->age = alea(0, MAX_AGE_POISSON);
-    f->energie_sante = ENERGIE_INIT_POISSON;
-    f->jrs_gest = 0;
-    f->posx = alea(0, HAUTEUR);
-    f->posy = alea(0, LARGEUR);
+	f->age = alea(0, MAX_AGE_POISSON);
+	f->energie_sante = ENERGIE_INIT_POISSON;
+	f->jrs_gest = 0;
+	f->posx = alea(0, HAUTEUR);
+	f->posy = alea(0, LARGEUR);
 
 	t_noeud* liste_p = creerNoeud(*f);
 	init_liste_poissons(&liste_p, ocean, POISSON_DEPART);
@@ -132,9 +151,15 @@ int main() {
 	int iteration = 0;
 	int nb_pois = get_nb_Animal(liste_p);
 	t_machineState machineState = UPDATE_REQUIN;
+	//t_machineState machineState = NOTHING;  //DB
+
+	int fishie = 0;
 
 	while (iteration < MAX_ITERATION) {
 		switch (machineState) {
+
+		case NOTHING:
+			break;
 		case UPDATE_REQUIN:
 
 			machineState = UPDATE_POISSON;
@@ -144,7 +169,7 @@ int main() {
 			printf("Deplacer poisson\n");
 			temp = liste_p;
 			while (temp->suivant != NULL) {
-				printf("\n\n\ndplacement\n");
+				printf("\ndplacement\n");
 				deplacer_poisson(ocean, &temp->animal);
 
 				temp = temp->suivant;
@@ -153,6 +178,35 @@ int main() {
 					break;
 				}
 			}
+
+			printf("Ajout BB\n");
+			temp = liste_p;
+			fishie = 0;
+			while (temp->suivant != NULL) {
+				if (puberte_atteinte(&temp->animal, NB_JRS_PUB_POISSON, NB_JRS_GEST_POISSON)) {
+					printf("\najout bb\n");
+					if (add_baby_fish(ocean, &temp->animal, &liste_p) == 1) {
+						printf("nb poissons: %d\n", get_nb_Animal(liste_p));
+						fishie++;
+					}
+					printf("nb poissons: %d\n", get_nb_Animal(liste_p));
+
+				}
+				temp = temp->suivant;
+			}
+
+			printf("Fishie: %d\n", fishie);
+
+			printf("INC poissons\n");
+			temp = liste_p;
+			while (temp->suivant != NULL) {
+				inc_age(&temp->animal, NB_COUPS);
+
+				temp = temp->suivant;
+
+			}
+			printf("nb poissons: %d\n", get_nb_Animal(liste_p));
+
 			machineState = DELAY;
 			break;
 
@@ -160,8 +214,7 @@ int main() {
 			delay_graph(100);
 			machineState = UPDATE_GRAPH;
 			break;
-		case NOTHING:
-			break;
+		
 		case UPDATE_GRAPH:
 
 			iteration++;
