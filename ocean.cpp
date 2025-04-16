@@ -27,20 +27,8 @@ typedef t_case t_ocean[HAUTEUR][LARGEUR];
 
 
 void init_graph() {
-	printf("Init graph\n");
 	init_graphe(HAUTEUR, LARGEUR);  //TODO je ne comprends pas les paramètres
 	init_zone_environnement(HAUTEUR, LARGEUR);
-	afficher_case(0, 0, 1, 1, WHITE);
-	afficher_case(1, 1, 10, 10, WHITE);
-	afficher_case(2, 2, 5, 50, YELLOW);
-	afficher_case(3, 3, 15, 10, WHITE);
-	afficher_case(4, 4, 100, 100, WHITE);
-	afficher_case(50, 45, 100, 100, WHITE);
-
-
-	afficher_infos(50, 70, 2);
-
-
 }
 
 void init_ocean(t_ocean ocean) {
@@ -51,7 +39,6 @@ void init_ocean(t_ocean ocean) {
 
 		}
 	}
-	printf("Ocean init\n");
 }
 
 t_case get_case_content(t_ocean ocean, int posx, int posy) {
@@ -72,17 +59,6 @@ void errase_case(t_ocean ocean, int posx, int posy) {
 }
 
 int count_empty_case(t_ocean ocean, int posx, int posy) {
-	/*ocean[posx-1][posy-1].contenu = VIDE;  //DB
-	ocean[posx-1][posy].contenu = REQUIN;
-	ocean[posx-1][posy+1].contenu = POISSON;
-
-	ocean[posx][posy-1].contenu = REQUIN;
-	ocean[posx][posy].contenu = VIDE;
-	ocean[posx][posy+1].contenu = VIDE;
-
-	ocean[posx+1][posy-1].contenu = VIDE;
-	ocean[posx+1][posy].contenu = POISSON;
-	ocean[posx+1][posy+1].contenu = REQUIN;*/
 	t_case cell;
 	int empty_count = 0;
 	int offset = 0;
@@ -102,13 +78,8 @@ int count_empty_case(t_ocean ocean, int posx, int posy) {
 			}
 			
 			cell = get_case_content(ocean, posx + i, posy + j+ offset);
-			//printf("x: %d, y: %d, contenu: %d\n", posx + i, posy + j+ offset, cell.contenu);  //DB
 			if (cell.contenu == VIDE) {
-				//printf("empty cell: x: %d y: %d\n", posx + i, posy + j+ offset);
 				empty_count++;
-			}
-			else {
-				//printf("Cell occupé x: %d y: %d\n", posx + i, posy + j+ offset);
 			}
 		}
 		
@@ -126,7 +97,6 @@ void draw_ocean(t_ocean ocean) {
 	//printf("draw ocean\n");
 	for (int i = 0; i < HAUTEUR; i++) {
 		for (int j = 0; j < LARGEUR;j++) {
-			//printf("x: %d y: %d , %d\n",i,j, ocean[i][j].contenu);
 			if (ocean[i][j].contenu == REQUIN) {
 				//printf("requin");
 				afficher_case(i, j, HAUTEUR, LARGEUR, BLUE);

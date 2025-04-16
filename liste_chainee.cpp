@@ -106,30 +106,9 @@ t_animal ContenuCourant(t_noeud* tete) {
 	return courant->animal;
 }
 
-//t_animal SupprimerCourant(t_noeud **tete) {
-//	t_noeud *courant = *tete;
-//	t_animal animal_courant;
-//
-//	if ((*tete)->suivant == NULL) {
-//		animal_courant = courant->animal; 
-//		free(courant);
-//		*tete = NULL;
-//
-//		return animal_courant;
-//	}
-//	else {
-//		*tete = (*tete)->suivant;
-//		animal_courant = courant->animal;
-//		free(courant);
-//
-//		return animal_courant;
-//	}
-//}
-
 t_animal SupprimerNoeud(t_noeud** tete, t_noeud* noeud_a_supprimer) {
 	t_animal animal_courant;
 
-	//printf("SupprimerNoeud\n");
 	if (*tete == NULL || noeud_a_supprimer == NULL) {
 		printf("Erreur: Liste vide ou nœud à supprimer est NULL\n");
 		return animal_courant; // Retourne un animal non initialisé en cas d'erreur
@@ -156,9 +135,6 @@ t_animal SupprimerNoeud(t_noeud** tete, t_noeud* noeud_a_supprimer) {
 	if (courant == NULL || courant->suivant == NULL) {
 		printf("courant est null\n");
 		
-		/*if (courant->suivant == NULL) {
-			printf("courant suivant est null");
-		}*/
 		printf("Erreur: Noeud à supprimer non trouvé dans la liste\n");
 		printf("Noeud: %p\n", noeud_a_supprimer);
 		return animal_courant; // Retourne un animal non initialisé en cas d'erreur
