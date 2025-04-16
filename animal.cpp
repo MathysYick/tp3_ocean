@@ -82,12 +82,12 @@ void dec_energie(t_animal* animal) {
 }
 
 /* Reçoit un animal et va retourner son niveau d'énergie.  */
-int  get_energie(t_animal* animal) {
+int  get_energie(const t_animal* animal) {
 	return animal->energie_sante;
 }
 
 /* Retourne 1 si l'animal reçu vient de mourir de faim (plus d'énergie)
    OU si il a atteint son âge maximal (age_max). On retourne 0 sinon.  */
 int  est_mort(const t_animal* animal, int age_max) {
-	return animal->age >= age_max || animal->energie_sante <= 0;
+	return animal->age >= age_max || get_energie(animal) <= 0;
 }

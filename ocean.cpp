@@ -65,9 +65,10 @@ void set_case(t_ocean ocean, void* animal, t_contenu contenu, int posx, int posy
 }
 
 void errase_case(t_ocean ocean, int posx, int posy) {
+	//printf("errase");
+
 	ocean[posx][posy].contenu = VIDE;
 	ocean[posx][posy].animal = NULL;
-	//printf("errase");
 }
 
 int count_empty_case(t_ocean ocean, int posx, int posy) {
@@ -89,18 +90,18 @@ int count_empty_case(t_ocean ocean, int posx, int posy) {
 		for (int j = -1; j <= 1; j++) {
 			offset = 0;
 			if (posx + i < 0 || posx + i >= HAUTEUR) {
-				printf("Out of bound in x\n");
+				//printf("Out of bound in x\n");
 				break;
 			}
 			if (posy + j < 0) {
-				printf("Out of bound in -y\n");
+				//printf("Out of bound in -y\n");
 				offset += 119;
 			}else if ( posy + j >= LARGEUR) {
-				printf("Out of bound in +y\n");
+				//printf("Out of bound in +y\n");
 				offset -= 119;
 			}
 			
-			t_case cell = get_case_content(ocean, posx + i, posy + j+ offset);
+			cell = get_case_content(ocean, posx + i, posy + j+ offset);
 			//printf("x: %d, y: %d, contenu: %d\n", posx + i, posy + j+ offset, cell.contenu);  //DB
 			if (cell.contenu == VIDE) {
 				//printf("empty cell: x: %d y: %d\n", posx + i, posy + j+ offset);
@@ -122,7 +123,7 @@ int count_empty_case(t_ocean ocean, int posx, int posy) {
 
 
 void draw_ocean(t_ocean ocean) {
-	printf("draw ocean\n");
+	//printf("draw ocean\n");
 	for (int i = 0; i < HAUTEUR; i++) {
 		for (int j = 0; j < LARGEUR;j++) {
 			//printf("x: %d y: %d , %d\n",i,j, ocean[i][j].contenu);
@@ -136,8 +137,13 @@ void draw_ocean(t_ocean ocean) {
 				//afficher_case(i, j, 1, 1, RED);
 			}
 			else if (ocean[i][j].contenu == POISSON) {
-				//printf("VIDE");
+				//printf("POISSON");
 				afficher_case(i, j, HAUTEUR, LARGEUR, GREEN);
+				//afficher_case(i, j, 1, 1, RED);
+			}
+			else if (ocean[i][j].contenu == DEBUG) {
+				printf("DEBUG\n");
+				afficher_case(i, j, HAUTEUR, LARGEUR, RED);
 				//afficher_case(i, j, 1, 1, RED);
 			}
 			if (ocean[i][j].contenu != VIDE) { //DB

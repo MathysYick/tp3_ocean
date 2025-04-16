@@ -46,7 +46,7 @@ void insererEnTete(t_noeud** tete, t_animal animal) {
 
 	nouveau->suivant = *tete;
 	*tete = nouveau;
-	printf("ptr: %p\n", nouveau->suivant);
+	//printf("ptr: %p\n", nouveau->suivant);
 }
 
 t_noeud* supprimerEnTete(t_noeud* tete) {
@@ -64,9 +64,11 @@ void afficher_liste(t_noeud* tete) {
 	int a = 0;
 	while (temp != NULL) {
 		a++;
-		printf("\n Noeud %d: %d -> ptr: % p", a, temp->animal.age, temp);
+		//printf("\nNoeud %d: %d -> ptr: % p", a, temp->animal.age, temp);
+		printf("%d ->", temp->animal.age);
+
 		temp = temp->suivant;
-		
+
 	}
 	printf("\nNULL\n");
 	printf("a = %d\n", a);
@@ -89,37 +91,82 @@ int get_nb_Animal(t_noeud* tete) {
 	while (tete != NULL) {
 		temp = tete;
 		tete = tete->suivant;
-		nbAnimal++; 
+		nbAnimal++;
 	}
 	return nbAnimal;
 }
 
-void DeplacerCourant(t_noeud *tete) {
-	t_noeud *courant = tete->suivant;
+void DeplacerCourant(t_noeud* tete) {
+	t_noeud* courant = tete->suivant;
 }
 
-t_animal ContenuCourant(t_noeud *tete) {
-	t_noeud *courant = tete;
+t_animal ContenuCourant(t_noeud* tete) {
+	t_noeud* courant = tete;
 
 	return courant->animal;
 }
 
-t_animal SupprimerCourant(t_noeud **tete) {
-	t_noeud *courant = *tete;
+//t_animal SupprimerCourant(t_noeud **tete) {
+//	t_noeud *courant = *tete;
+//	t_animal animal_courant;
+//
+//	if ((*tete)->suivant == NULL) {
+//		animal_courant = courant->animal; 
+//		free(courant);
+//		*tete = NULL;
+//
+//		return animal_courant;
+//	}
+//	else {
+//		*tete = (*tete)->suivant;
+//		animal_courant = courant->animal;
+//		free(courant);
+//
+//		return animal_courant;
+//	}
+//}
+
+t_animal SupprimerNoeud(t_noeud** tete, t_noeud* noeud_a_supprimer) {
 	t_animal animal_courant;
 
-	if ((*tete)->suivant == NULL) {
-		animal_courant = courant->animal; 
-		free(courant);
-		*tete = NULL;
+	//printf("SupprimerNoeud\n");
+	if (*tete == NULL || noeud_a_supprimer == NULL) {
+		printf("Erreur: Liste vide ou nœud à supprimer est NULL\n");
+		return animal_courant; // Retourne un animal non initialisé en cas d'erreur
+	}
 
+	// Si le nœud à supprimer est le nœud de tête
+	if (*tete == noeud_a_supprimer) {
+		*tete = noeud_a_supprimer->suivant;
+		animal_courant = noeud_a_supprimer->animal;
+		free(noeud_a_supprimer);
 		return animal_courant;
 	}
-	else {
-		*tete = (*tete)->suivant;
-		animal_courant = courant->animal;
-		free(courant);
 
-		return animal_courant;
+
+	// Trouver le nœud précédent
+	t_noeud* courant = *tete;
+
+	while (courant != NULL && courant->suivant != noeud_a_supprimer) {
+		courant = courant->suivant;
+		
 	}
+
+	// Si le nœud à supprimer n'est pas trouvé
+	if (courant == NULL || courant->suivant == NULL) {
+		printf("courant est null\n");
+		
+		/*if (courant->suivant == NULL) {
+			printf("courant suivant est null");
+		}*/
+		printf("Erreur: Noeud à supprimer non trouvé dans la liste\n");
+		printf("Noeud: %p\n", noeud_a_supprimer);
+		return animal_courant; // Retourne un animal non initialisé en cas d'erreur
+	}
+	// Détacher le nœud à supprimer de la liste
+	courant->suivant = noeud_a_supprimer->suivant;
+	animal_courant = noeud_a_supprimer->animal;
+	free(noeud_a_supprimer);
+
+	return animal_courant;
 }

@@ -43,6 +43,13 @@ t_noeud* libererListe(t_noeud* tete);
 
 int get_nb_Animal(t_noeud* tete);
 
+void DeplacerCourant(t_noeud* tete);
+
+t_animal ContenuCourant(t_noeud* tete);
+
+//t_animal SupprimerCourant(t_noeud** tete);
+
+t_animal SupprimerNoeud(t_noeud** tete, t_noeud* noeud_a_supprimer);
 //Déplacer le pointeur courant
 
 //Obtenir le contenu du pointeur courant
